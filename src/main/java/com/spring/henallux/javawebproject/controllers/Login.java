@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/login")
@@ -25,10 +23,13 @@ public class Login extends ControllerBase {
 
     @RequestMapping(value = "/form", method = RequestMethod.GET)
     public String loginForm(Model model, Locale locale) {
-        Map<String, String> map = new HashMap<>();
-        map.put("submit", getMessageSource().getMessage("submit", null, locale));
-        map.put("username", getMessageSource().getMessage("username", null, locale));
-        map.put("password", getMessageSource().getMessage("password", null, locale));
+        prepareModel(model, locale);
+
+        Map<String, String> map = new HashMap<String, String>() {{
+            put("submit", getMessageSource().getMessage("submit", null, locale));
+            put("username", getMessageSource().getMessage("username", null, locale));
+            put("password", getMessageSource().getMessage("password", null, locale));
+        }};
 
         model.addAttribute("loginForm", new LoginForm());
         model.addAllAttributes(map);

@@ -1,5 +1,6 @@
 package com.spring.henallux.javawebproject.controllers;
 
+import com.spring.henallux.javawebproject.services.CheeseServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -13,9 +14,11 @@ import java.util.Map;
 @Controller
 @RequestMapping(value="/hello")
 public class Welcome extends ControllerBase {
+    private final CheeseServices cheeseServices;
     @Autowired
-    public Welcome(MessageSource messageSource) {
+    public Welcome(MessageSource messageSource, CheeseServices cheeseServices) {
         setMessageSource(messageSource);
+        this.cheeseServices = cheeseServices;
     }
 
     @RequestMapping(value = "/say", method = RequestMethod.GET)
@@ -25,9 +28,12 @@ public class Welcome extends ControllerBase {
 
     @RequestMapping(value = "/say/{name}", method = RequestMethod.GET)
     public String helloBis(final Model model, Locale locale, @PathVariable(value = "name") String name) {
-        Map<String, String> map = new HashMap<>();
-        map.put("title", getMessageSource().getMessage("helloPage", null, locale));
-        map.put("welcome", getMessageSource().getMessage("welcome", null, locale));
+        prepareModel(model, locale);
+
+        Map<String, String> map = new HashMap<String, String>() {{
+            put("title", getMessageSource().getMessage("helloPage", null, locale));
+            put("welcome", getMessageSource().getMessage("welcome", null, locale));
+        }};
 
         model.addAllAttributes(map);
         model.addAttribute("name", name);
