@@ -9,11 +9,11 @@
         <form:form id = "login" method="POST" action="/leGrandRoiFromage/login/formResponse" modelAttribute="loginForm">
             <p>
                 <form:label path="userName">${username}</form:label>
-                <form:input path="userName"/>
+                <form:input id="userNameInput" path="userName"/>
             </p>
             <p>
                 <form:label path="password">${password}</form:label>
-                <form:input path="password"/>
+                <form:input id="passwordInput" path="password"/>
             </p>
             <p>
                 <form:button>${submit}</form:button>

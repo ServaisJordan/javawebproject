@@ -1,7 +1,7 @@
 package com.spring.henallux.javawebproject.services;
 
 
-import com.spring.henallux.javawebproject.model.Cheese;
+import com.spring.henallux.javawebproject.dataAccess.entity.Cheese;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
