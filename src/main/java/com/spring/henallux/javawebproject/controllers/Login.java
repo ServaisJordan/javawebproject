@@ -19,7 +19,7 @@ public class Login extends ControllerBase {
 
     @Autowired
     public Login(MessageSource messageSource) {
-        setMessageSource(messageSource);
+        super(messageSource);
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.GET)
@@ -40,6 +40,6 @@ public class Login extends ControllerBase {
 
     @RequestMapping(value = "/formResponse", method = RequestMethod.POST)
     public String loginFormResponse(@ModelAttribute(value = "loginForm") LoginForm response) {
-        return "redirect:/hello/say/"+response.getUserName();
+        return "redirect:/hello/say/"+response.getUsername();
     }
 }

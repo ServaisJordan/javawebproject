@@ -1,7 +1,7 @@
 package com.spring.henallux.javawebproject.model;
 
 public class LoginForm {
-    private String userName;
+    private String username;
     private String password;
     private final int TOO_SHORT_VALUE = 6;
 
@@ -14,8 +14,8 @@ public class LoginForm {
 
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
@@ -25,7 +25,7 @@ public class LoginForm {
     public void setUserName(String userName) throws Exception {
         if (userName.length() < TOO_SHORT_VALUE) throw  new Exception();
 
-        this.userName = userName;
+        this.username = username;
     }
 
     public void setPassword(String password) throws Exception {

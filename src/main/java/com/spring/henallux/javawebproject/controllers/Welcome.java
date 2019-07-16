@@ -17,7 +17,7 @@ public class Welcome extends ControllerBase {
     private final CheeseServices cheeseServices;
     @Autowired
     public Welcome(MessageSource messageSource, CheeseServices cheeseServices) {
-        setMessageSource(messageSource);
+        super(messageSource);
         this.cheeseServices = cheeseServices;
     }
 

@@ -16,7 +16,7 @@ public class Command {
     @Column(name = "creationDate")
     private Date creationDate;
 
-    @JoinColumn(name = "userName", referencedColumnName = "userName")
+    @JoinColumn(name = "username", referencedColumnName = "username")
     @ManyToOne
     private User customer;
     @OneToMany(mappedBy = "commandId")

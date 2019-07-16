@@ -18,7 +18,9 @@
     
         <spring:url value="/leGrandRoiFromage/login/form" var="signinLink"/>
         <spring:url value="/leGrandRoiFromage/register/form" var="registerLink"/>
-        <a href="${signinLink}">${signin}</a> <a href="${registerLink}">${signup}</a>
+        <sec:authorize access="!authenticated()">
+            <a href="${signinLink}">${signin}</a> <a href="${registerLink}">${signup}</a>
+        </sec:authorize>
         <div>
             <tiles:insertAttribute name = "main-content"/>
         </div>

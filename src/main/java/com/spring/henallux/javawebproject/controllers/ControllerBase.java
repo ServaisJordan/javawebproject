@@ -13,6 +13,10 @@ public abstract class ControllerBase {
 
     private MessageSource messageSource;
 
+    public ControllerBase(MessageSource messageSource) {
+        setMessageSource(messageSource);
+    }
+
     public MessageSource getMessageSource() {
         return messageSource;
     }

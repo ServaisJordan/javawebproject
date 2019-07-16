@@ -1,25 +1,31 @@
 package com.spring.henallux.javawebproject.dataAccess.entity;
 
-import com.spring.henallux.javawebproject.model.LoginForm;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+
+import static org.springframework.util.StringUtils.isEmpty;
 
 @Entity
 @Table(name = "User")
-public class User extends LoginForm {
+public class User implements UserDetails {
     @Id
-    @Column(name = "userName")
+    @Column(name = "username")
     private String username;
     @Column(name = "password")
     private String password;
     @Column(name = "authorities")
     private String authorities;
     @Column(name = "NON_EXPIRED")
-    private Boolean nonExpired;
+    private Boolean accountNonExpired;
     @Column(name = "NON_LOCKED")
-    private Boolean nonLocked;
+    private Boolean accountNonLocked;
     @Column(name = "CREDENTIAL_NON_EXPIRED")
     private Boolean credentialsNonExpired;
     @Column(name = "enable")
@@ -51,6 +57,23 @@ public class User extends LoginForm {
 
     }
 
+    @Override
+    public Collection<GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+
+        if(!isEmpty(authorities)) {
+            String[] authoritiesAsArray = authorities.split(",");
+
+            for(String authority : authoritiesAsArray) {
+                if(!isEmpty(authority)) {
+                    grantedAuthorities.add(new SimpleGrantedAuthority(authority));
+                }
+            }
+        }
+
+        return grantedAuthorities;
+    }
+
     //TODO setter + getter
     //Setters section
     public void setUsername(String username) {
@@ -65,12 +88,12 @@ public class User extends LoginForm {
         this.authorities = authorities;
     }
 
-    public void setNonExpired(Boolean nonExpired) {
-        this.nonExpired = nonExpired;
+    public void setAccountNonExpired(Boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
     }
 
-    public void setNonLocked(Boolean nonLocked) {
-        this.nonLocked = nonLocked;
+    public void setAccountNonLocked(Boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
     }
 
     public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
@@ -130,23 +153,19 @@ public class User extends LoginForm {
         return password;
     }
 
-    public String getAuthorities() {
-        return authorities;
+    public boolean isAccountNonExpired() {
+        return accountNonExpired;
     }
 
-    public Boolean getNonExpired() {
-        return nonExpired;
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
     }
 
-    public Boolean getNonLocked() {
-        return nonLocked;
-    }
-
-    public Boolean getCredentialsNonExpired() {
+    public boolean isCredentialsNonExpired() {
         return credentialsNonExpired;
     }
 
-    public Boolean getEnable() {
+    public boolean isEnabled() {
         return enable;
     }
 
