@@ -1,5 +1,6 @@
 package com.spring.henallux.javawebproject.configuration;
 
+import com.spring.henallux.javawebproject.services.UserDetailsServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,13 +16,13 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private static final String LOGIN_REQUEST = "/login";
-    private static final String[] AUTHORIZED_REQUESTS_ANYBODY = new String[]{"/"};
+    private static final String[] AUTHORIZED_REQUESTS_ANYBODY = new String[]{"/", "/css/**","/images/**","/js/**"};
     private static final String[] AUTHORIZED_REQUESTS_ADMIN = new String[]{"/admin"};
 
     private UserDetailsService userDetailsServiceImpl;
 
     @Autowired
-    public WebSecurityConfiguration(UserDetailsService userDetailsServiceImpl) {
+    public WebSecurityConfiguration(UserDetailsServiceImplementation userDetailsServiceImpl) {
         this.userDetailsServiceImpl = userDetailsServiceImpl;
     }
 

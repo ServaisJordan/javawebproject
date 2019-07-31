@@ -25,8 +25,10 @@ public abstract class ControllerBase {
         this.messageSource = messageSource;
     }
 
-    public Model prepareModel(Model model, Locale locale) {
+    public Model prepareModel(final Model model, Locale locale) {
         Map<String, String> map = new HashMap<String, String>() {{
+            put("adminPageTitle", messageSource.getMessage("adminPageTitle", null, locale));
+            put("authenticatedPageTitle", messageSource.getMessage("authenticatedPageTitle", null, locale));
             put("signin", messageSource.getMessage("signin", null, locale));
             put("signup", messageSource.getMessage("signup", null, locale));
         }};

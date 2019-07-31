@@ -1,25 +1,16 @@
-package com.spring.henallux.javawebproject.dataAccess.entity;
+package com.spring.henallux.javawebproject.model;
 
-import javax.persistence.*;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Date;
 
-
-@Entity
-@Table(name = "Command")
 public class Command {
-    @Id
-    @Column(name = "id")
     private Integer id;
-    @Column(name = "deliveryDate")
     private Date deliveryDate;
-    @Column(name = "creationDate")
     private Date creationDate;
 
-    @JoinColumn(name = "username", referencedColumnName = "username")
-    @ManyToOne
     private User customer;
-    @OneToMany(mappedBy = "commandId")
     private Collection<Line> lines;
 
     public Command() {
@@ -31,6 +22,8 @@ public class Command {
         this.id = id;
     }
 
+    @NotNull
+    @Future
     public void setDeliveryDate(Date deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
@@ -39,7 +32,7 @@ public class Command {
         this.creationDate = creationDate;
     }
 
-    public void setUserName(User customer) {
+    public void setCustomer(User customer) {
         this.customer = customer;
     }
 

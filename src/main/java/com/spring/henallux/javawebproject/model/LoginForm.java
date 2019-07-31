@@ -1,12 +1,15 @@
 package com.spring.henallux.javawebproject.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class LoginForm {
     private String username;
     private String password;
-    private final int TOO_SHORT_VALUE = 6;
 
-    public LoginForm(String userName, String password) throws Exception {
-        setUserName(userName);
+    public LoginForm(String username, String password) {
+        setUserName(username);
         setPassword(password);
     }
 
@@ -22,15 +25,15 @@ public class LoginForm {
         return password;
     }
 
-    public void setUserName(String userName) throws Exception {
-        if (userName.length() < TOO_SHORT_VALUE) throw  new Exception();
-
+    @NotNull
+    @Pattern(regexp = "^[a-zA-Z''-'\\s]{1,40}$")
+    public void setUserName(String username) {
         this.username = username;
     }
 
-    public void setPassword(String password) throws Exception {
-        if (password.length() < TOO_SHORT_VALUE) throw new Exception();
-
+    @NotNull
+    @Size(min = 6)
+    public void setPassword(String password) {
         this.password = password;
     }
 }

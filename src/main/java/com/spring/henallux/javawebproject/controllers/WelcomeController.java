@@ -13,10 +13,10 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value="/hello")
-public class Welcome extends ControllerBase {
+public class WelcomeController extends ControllerBase {
     private final CheeseServices cheeseServices;
     @Autowired
-    public Welcome(MessageSource messageSource, CheeseServices cheeseServices) {
+    public WelcomeController(MessageSource messageSource, CheeseServices cheeseServices) {
         super(messageSource);
         this.cheeseServices = cheeseServices;
     }

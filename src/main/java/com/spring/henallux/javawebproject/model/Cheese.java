@@ -1,24 +1,14 @@
-package com.spring.henallux.javawebproject.dataAccess.entity;
+package com.spring.henallux.javawebproject.model;
 
-import javax.persistence.*;
 import java.util.Collection;
 
-@Entity
-@Table(name = "Cheese")
 public class Cheese {
-    @Id
-    @Column(name = "id")
     private Integer id;
-    @Column(name = "pricePerKilo")
     private Double pricePerKilo;
-    @Column(name = "name")
     private String name;
-    @Column(name = "URLImage")
     private String URLImage;
 
-    @OneToMany(mappedBy = "cheeseId")
     private Collection<Line> lines;
-    @OneToMany(mappedBy = "cheeseId")
     private Collection<CheeseLanguage> translations;
 
     public Cheese() {
@@ -30,11 +20,11 @@ public class Cheese {
         this.id = id;
     }
 
-    public void setName(String name) throws Exception {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public void setPricePerKilo(Double price) throws Exception {
+    public void setPricePerKilo(Double price) {
         this.pricePerKilo = price;
     }
 

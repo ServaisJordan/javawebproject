@@ -1,18 +1,11 @@
-package com.spring.henallux.javawebproject.dataAccess.entity;
+package com.spring.henallux.javawebproject.model;
 
-import javax.persistence.*;
 import java.util.Collection;
 
-@Entity
-@Table(name = "Language")
 public class Language {
-    @Id
-    @Column(name = "id")
     private Integer id;
-    @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "languageId")
     private Collection<CheeseLanguage> descriptions;
 
     public Language() {

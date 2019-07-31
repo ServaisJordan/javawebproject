@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Cheese_Language")
-public class CheeseLanguage {
+public class CheeseLanguageEntity {
     @Id
     @Column(name = "id")
     private Integer id;
@@ -13,12 +13,12 @@ public class CheeseLanguage {
 
     @JoinColumn(name = "cheeseId", referencedColumnName = "id")
     @ManyToOne
-    private Cheese cheese;
+    private CheeseEntity cheese;
     @JoinColumn(name = "languageId" , referencedColumnName = "id")
     @ManyToOne
-    private Language language;
+    private LanguageEntity language;
 
-    public CheeseLanguage() {
+    public CheeseLanguageEntity() {
 
     }
 
@@ -31,11 +31,11 @@ public class CheeseLanguage {
         this.description = description;
     }
 
-    public void setCheese(Cheese cheese) {
+    public void setCheeseEntity(CheeseEntity cheese) {
         this.cheese = cheese;
     }
 
-    public void setLanguage(Language language) {
+    public void setLanguageEntity(LanguageEntity language) {
         this.language = language;
     }
 
@@ -48,11 +48,11 @@ public class CheeseLanguage {
         return description;
     }
 
-    public Cheese getCheese() {
+    public CheeseEntity getCheeseEntity() {
         return cheese;
     }
 
-    public Language getLanguage() {
+    public LanguageEntity getLanguageEntity() {
         return language;
     }
 }

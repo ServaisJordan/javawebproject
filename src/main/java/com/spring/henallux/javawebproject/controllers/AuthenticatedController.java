@@ -13,16 +13,16 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/authenticated")
-public class Authenticated extends ControllerBase {
+public class AuthenticatedController extends ControllerBase {
     @Autowired
-    public Authenticated(MessageSource messageSource) {
+    public AuthenticatedController(MessageSource messageSource) {
         super(messageSource);
     }
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
-    public String authenticatedPage(Model model, Locale locale) {
+    public String authenticatedPage(final Model model, Locale locale) {
         Map<String, String> map = new HashMap<String, String>() {{
-            put("title", getMessageSource().getMessage("authenticatedTitle", null, locale));
+            put("title", getMessageSource().getMessage("authenticatedPageTitle", null, locale));
             put("authenticatedMessage", getMessageSource().getMessage("authenticatedMessage", null, locale));
         }};
 

@@ -13,19 +13,19 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/admin")
-public class Admin extends ControllerBase {
+public class AdminController extends ControllerBase {
 
     @Autowired
-    public Admin(MessageSource messageSource) {
+    public AdminController(MessageSource messageSource) {
         super(messageSource);
     }
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
-    public String adminPage(Model model, Locale locale) {
+    public String adminPage(final Model model, Locale locale) {
         prepareModel(model, locale);
 
         Map<String, String> map = new HashMap<String, String>() {{
-            put("adminMessage", getMessageSource().getMessage("adminCertification", null, locale));
+            put("adminMessage", getMessageSource().getMessage("adminMessage", null, locale));
             put("title", getMessageSource().getMessage("adminPageTitle", null, locale));
         }};
 

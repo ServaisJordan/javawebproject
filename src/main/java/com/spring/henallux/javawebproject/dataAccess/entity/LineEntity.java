@@ -3,21 +3,23 @@ package com.spring.henallux.javawebproject.dataAccess.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Line")
-public class Line {
+@Table(name = "LineEntity")
+public class LineEntity {
     @Id
     @Column(name = "id")
     private Integer id;
     @Column(name = "quantity")
     private Double quantity;
+    @Column(name = "pricePerKilo")
+    private Double pricePerKilo;
 
     @JoinColumn(name = "commandId", referencedColumnName = "id")
     @ManyToOne
-    private Command command;
+    private CommandEntity command;
     @JoinColumn(name = "cheeseId", referencedColumnName = "id")
-    private Cheese cheese;
+    private CheeseEntity cheese;
 
-    public Line() {
+    public LineEntity() {
 
     }
 
@@ -30,11 +32,15 @@ public class Line {
         this.quantity = quantity;
     }
 
-    public void setCommand(Command command) {
+    public void setPricePerKilo(Double pricePerKilo) {
+        this.pricePerKilo = pricePerKilo;
+    }
+
+    public void setCommandEntity(CommandEntity command) {
         this.command = command;
     }
 
-    public void setCheese(Cheese cheese) {
+    public void setCheeseEntity(CheeseEntity cheese) {
         this.cheese = cheese;
     }
 
@@ -47,11 +53,15 @@ public class Line {
         return quantity;
     }
 
-    public Command getCommand() {
+    public Double getPricePerKilo() {
+        return pricePerKilo;
+    }
+
+    public CommandEntity getCommandEntity() {
         return command;
     }
 
-    public Cheese getCheese() {
-        return  cheese;
+    public CheeseEntity getCheeseEntity() {
+        return cheese;
     }
 }

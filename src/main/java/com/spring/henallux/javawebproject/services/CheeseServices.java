@@ -1,24 +1,27 @@
 package com.spring.henallux.javawebproject.services;
 
 
-import com.spring.henallux.javawebproject.dataAccess.entity.Cheese;
+import com.spring.henallux.javawebproject.dataAccess.dao.CheeseDAO;
+import com.spring.henallux.javawebproject.model.Cheese;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 @Service
 public class CheeseServices {
+    private final CheeseDAO dao;
 
-    public List<Cheese> getAllCheeses() {
-        return new ArrayList<>();
+    @Autowired
+    public CheeseServices(CheeseDAO dao) {
+        this.dao = dao;
     }
 
-    public Cheese getCheese(int id) throws Exception {
-        return new Cheese();
+    public Collection<Cheese> findAll() {
+        return dao.findAllCheese();
     }
 
-    public boolean deleteCheese(int id) {
-        return true;
+    public Cheese find(int id) throws Exception {
+        return dao.findCheese(id);
     }
 }
