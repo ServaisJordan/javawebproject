@@ -13,7 +13,7 @@ import java.util.List;
 import static org.springframework.util.StringUtils.isEmpty;
 
 @Entity
-@Table(name = "UserEntity")
+@Table(name = "user")
 public class UserEntity implements UserDetails {
     @Id
     @Column(name = "username")
@@ -22,35 +22,35 @@ public class UserEntity implements UserDetails {
     private String password;
     @Column(name = "authorities")
     private String authorities;
-    @Column(name = "NON_EXPIRED")
+    @Column(name = "non_expired")
     private Boolean accountNonExpired;
-    @Column(name = "NON_LOCKED")
+    @Column(name = "non_locked")
     private Boolean accountNonLocked;
-    @Column(name = "CREDENTIAL_NON_EXPIRED")
+    @Column(name = "credentials_non_expired")
     private Boolean credentialsNonExpired;
     @Column(name = "enable")
     private Boolean enable;
 
     @Column(name = "name")
     private String name;
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     private String firstName;
     @Column(name = "email")
     private String email;
-    @Column(name = "phoneNumber")
+    @Column(name = "phone_number")
     private String phoneNumber;
-    @Column(name = "postalCode")
+    @Column(name = "postal_code")
     private String postalCode;
     @Column(name = "country")
     private String country;
     @Column(name = "address")
     private String address;
     @Column(name = "gender")
-    private Character gender;
-    @Column(name = "birthDate")
+    private String gender;
+    @Column(name = "birth_date")
     private Date birthDate;
 
-    @OneToMany(mappedBy = "userName")
+    @OneToMany(mappedBy = "customer")
     private Collection<CommandEntity> commands;
 
     public UserEntity() {
@@ -133,7 +133,7 @@ public class UserEntity implements UserDetails {
     }
 
     public void setGender(Character gender) {
-        this.gender = gender;
+        this.gender = gender.toString();
     }
 
     public void setBirthDate(Date birthDate) {
@@ -201,7 +201,7 @@ public class UserEntity implements UserDetails {
         return birthDate;
     }
 
-    public Character getGender() {
+    public String getGender() {
         return gender;
     }
 

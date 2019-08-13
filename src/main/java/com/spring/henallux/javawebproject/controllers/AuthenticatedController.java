@@ -7,9 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/authenticated")
@@ -21,12 +19,7 @@ public class AuthenticatedController extends ControllerBase {
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     public String authenticatedPage(final Model model, Locale locale) {
-        Map<String, String> map = new HashMap<String, String>() {{
-            put("title", getMessageSource().getMessage("authenticatedPageTitle", null, locale));
-            put("authenticatedMessage", getMessageSource().getMessage("authenticatedMessage", null, locale));
-        }};
-
-        model.addAllAttributes(map);
+        model.addAttribute("title", getMessageSource().getMessage("authenticatedPageTitle", null, locale));
 
         return "integrated:authenticated";
     }

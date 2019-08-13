@@ -5,4 +5,4 @@ server:
 spring:
   datasource:
     password: Dragon123654789
-    url: jdbc:mysql://localhost:3306/dbo?user=admin
+    url: jdbc:mysql://localhost:3306/javawebprojectcheeseking?user=root&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC

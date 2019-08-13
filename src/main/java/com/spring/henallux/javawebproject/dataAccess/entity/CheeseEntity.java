@@ -4,22 +4,22 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "CheeseEntity")
+@Table(name = "cheese")
 public class CheeseEntity {
     @Id
     @Column(name = "id")
     private Integer id;
-    @Column(name = "pricePerKilo")
+    @Column(name = "price_per_kilo")
     private Double pricePerKilo;
     @Column(name = "name")
     private String name;
-    @Column(name = "URLImage")
+    @Column(name = "URL_image")
     private String URLImage;
 
-    @OneToMany(mappedBy = "cheeseId")
-    private Collection<LineEntity> lines;
-    @OneToMany(mappedBy = "cheeseId")
+    @OneToMany(mappedBy = "cheese")
     private Collection<CheeseLanguageEntity> translations;
+    @OneToMany(mappedBy = "cheese")
+    private Collection<LineEntity> lines;
 
     public CheeseEntity() {
 

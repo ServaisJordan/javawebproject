@@ -1,6 +1,8 @@
 package com.spring.henallux.javawebproject.model;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Cheese {
     private Integer id;
@@ -64,4 +66,6 @@ public class Cheese {
     public Collection<CheeseLanguage> getTranslations() {
         return translations;
     }
+
+    public List<CheeseLanguage> getTranslationsList() {return translations.stream().collect(Collectors.toList());}
 }

@@ -1,3 +1,4 @@
+<%@include file="include/importTags.jsp"%>
 <%--
   Created by IntelliJ IDEA.
   User: HP
@@ -5,11 +6,10 @@
   Time: 21:50
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" languageEntity="java" %>
 <html>
     <head>
     </head>
     <body>
-        <p>${authenticatedMessage}</p>
+        <p><spring:message code="authenticatedMessage"/></p>
     </body>
 </html>

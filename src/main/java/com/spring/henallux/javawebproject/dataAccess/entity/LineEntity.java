@@ -3,20 +3,21 @@ package com.spring.henallux.javawebproject.dataAccess.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "LineEntity")
+@Table(name = "line")
 public class LineEntity {
     @Id
     @Column(name = "id")
     private Integer id;
     @Column(name = "quantity")
     private Double quantity;
-    @Column(name = "pricePerKilo")
+    @Column(name = "price_per_kilo")
     private Double pricePerKilo;
 
-    @JoinColumn(name = "commandId", referencedColumnName = "id")
+    @JoinColumn(name = "command_id", referencedColumnName = "id")
     @ManyToOne
     private CommandEntity command;
-    @JoinColumn(name = "cheeseId", referencedColumnName = "id")
+    @JoinColumn(name = "cheese_id", referencedColumnName = "id")
+    @ManyToOne
     private CheeseEntity cheese;
 
     public LineEntity() {

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "LanguageEntity")
+@Table(name = "language")
 public class LanguageEntity {
     @Id
     @Column(name = "id")
@@ -12,7 +12,7 @@ public class LanguageEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "languageId")
+    @OneToMany(mappedBy = "language")
     private Collection<CheeseLanguageEntity> descriptions;
 
     public LanguageEntity() {

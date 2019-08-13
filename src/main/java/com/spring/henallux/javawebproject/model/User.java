@@ -1,5 +1,7 @@
 package com.spring.henallux.javawebproject.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 
@@ -12,14 +14,39 @@ public class User extends LoginForm {
     private Boolean credentialsNonExpired;
     private Boolean enable;
 
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = "^\\D+$")
+    @Size(min=6)
     private String name;
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = "^\\D+$")
+    @Size(min=6)
     private String firstName;
+    @NotNull
+    @NotEmpty
+    @Email
     private String email;
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = "^0[1-68]([-. ]?\\d{2}){4}$")
     private String phoneNumber;
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = "^\\d{4,5}$")
     private String postalCode;
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = "^[A-z,' -]+$")
     private String country;
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = "^(\\d+ ?,? ?)?([A-z', \\d])+ ?(\\d+ ([boite|box] ?\\d))?$")
     private String address;
-    private Character gender;
+    @Pattern(regexp = "^[m|f|M|F]$")
+    private String gender;
+    @Past
     private Date birthDate;
 
     private Collection<Command> commands;
@@ -53,9 +80,6 @@ public class User extends LoginForm {
         this.enable = enable;
     }
 
-    @NotNull
-    @Pattern(regexp = "^\\D+$")
-    @Size(min=6)
     public void setName(String name) {
         this.name = name;
     }
@@ -64,42 +88,32 @@ public class User extends LoginForm {
         this.firstName = firstName;
     }
 
-    @NotNull
-    @Email
     public void setEmail(String email) {
         this.email = email;
     }
 
-    @NotNull
-    @Pattern(regexp = "^0[1-68]([-. ]?\\d{2}){4}$")
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    @NotNull
-    @Pattern(regexp = "^\\d{4,5}$")
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
 
-    @NotNull
-    @Pattern(regexp = "^[A-z,' -]+$")
     public void setCountry(String country) {
         this.country = country;
     }
 
-    @NotNull
-    @Pattern(regexp = "^(\\d+ ?,? ?)?([A-z', \\d])+ ?(\\d+ ([boite|box] ?\\d))?$")
     public void setAddress(String address) {
         this.address = address;
     }
 
-    @Pattern(regexp = "^[m|f|M|F]$")
     public void setGender(Character gender) {
-        this.gender = gender;
+        this.gender = gender.toString();
     }
 
-    @Past
+    public void setGender(String gender) {this.gender = gender;}
+
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
@@ -157,7 +171,7 @@ public class User extends LoginForm {
         return birthDate;
     }
 
-    public Character getGender() {
+    public String getGender() {
         return gender;
     }
 

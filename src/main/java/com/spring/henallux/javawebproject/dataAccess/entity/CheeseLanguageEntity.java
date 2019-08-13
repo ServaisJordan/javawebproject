@@ -3,7 +3,7 @@ package com.spring.henallux.javawebproject.dataAccess.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Cheese_Language")
+@Table(name = "cheese_language")
 public class CheeseLanguageEntity {
     @Id
     @Column(name = "id")
@@ -11,10 +11,10 @@ public class CheeseLanguageEntity {
     @Column(name = "description")
     private String description;
 
-    @JoinColumn(name = "cheeseId", referencedColumnName = "id")
+    @JoinColumn(name = "cheese_id", referencedColumnName = "id")
     @ManyToOne
     private CheeseEntity cheese;
-    @JoinColumn(name = "languageId" , referencedColumnName = "id")
+    @JoinColumn(name = "language_id" , referencedColumnName = "id")
     @ManyToOne
     private LanguageEntity language;
 

@@ -20,16 +20,10 @@ public class AdminController extends ControllerBase {
         super(messageSource);
     }
 
-    @RequestMapping(value = "/page", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String adminPage(final Model model, Locale locale) {
-        prepareModel(model, locale);
 
-        Map<String, String> map = new HashMap<String, String>() {{
-            put("adminMessage", getMessageSource().getMessage("adminMessage", null, locale));
-            put("title", getMessageSource().getMessage("adminPageTitle", null, locale));
-        }};
-
-        model.addAllAttributes(map);
+        model.addAttribute("title", getMessageSource().getMessage("adminPageTitle", null, locale));
 
         return "integrated:admin";
     }

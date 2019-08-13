@@ -2,14 +2,13 @@ package com.spring.henallux.javawebproject.dataAccess.dao;
 
 import com.spring.henallux.javawebproject.dataAccess.entity.UserEntity;
 import com.spring.henallux.javawebproject.dataAccess.repository.UserRepository;
+import com.spring.henallux.javawebproject.exceptions.UserNotFound;
 import com.spring.henallux.javawebproject.model.User;
 import com.spring.henallux.javawebproject.utility.ProviderConverter;
 import com.spring.henallux.javawebproject.utility.TestModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.validation.BindingResult;
 
-import javax.validation.Valid;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,10 +30,10 @@ public class UserDAO {
         return dataAccess.findAll().stream().map(mapper::userEntityToUserModel).collect(Collectors.toList());
     }
 
-    public User findUser(String username) throws Exception {
+    public User findUser(String username) throws UserNotFound {
         Optional<UserEntity> userEntity = dataAccess.findByUsername(username);
 
-        if (!userEntity.isPresent()) throw new Exception();
+        if (!userEntity.isPresent()) throw new UserNotFound();
         return mapper.userEntityToUserModel(userEntity.get());
     }
 

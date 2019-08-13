@@ -6,20 +6,22 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "CommandEntity")
+@Table(name = "command")
 public class CommandEntity {
     @Id
     @Column(name = "id")
     private Integer id;
-    @Column(name = "deliveryDate")
+    @Column(name = "delivery_date")
     private Date deliveryDate;
-    @Column(name = "creationDate")
+    @Column(name = "creation_date")
     private Date creationDate;
+    @Column(name = "is_pay")
+    private Boolean isPay;
 
     @JoinColumn(name = "username", referencedColumnName = "username")
     @ManyToOne
     private UserEntity customer;
-    @OneToMany(mappedBy = "commandId")
+    @OneToMany(mappedBy = "command")
     private Collection<LineEntity> lines;
 
     public CommandEntity() {
@@ -43,10 +45,17 @@ public class CommandEntity {
         this.customer = customer;
     }
 
-    public void setLine(Collection<LineEntity> lines) {
+    public void setLines(Collection<LineEntity> lines) {
         this.lines = lines;
     }
 
+    public void setIsPay(Boolean isPay) {
+        this.isPay = isPay;
+    }
+
+    public void setCustomer(UserEntity customer) {
+        this.customer = customer;
+    }
     //Getters section
     public Integer getId() {
         return id;
@@ -64,7 +73,11 @@ public class CommandEntity {
         return customer;
     }
 
-    public Collection<LineEntity> getLineEntities() {
+    public Collection<LineEntity> getLines() {
         return lines;
+    }
+
+    public Boolean getIsPay() {
+        return isPay;
     }
 }
