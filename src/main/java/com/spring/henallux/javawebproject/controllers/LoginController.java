@@ -1,6 +1,7 @@
 package com.spring.henallux.javawebproject.controllers;
 
-import com.spring.henallux.javawebproject.model.LoginForm;
+import com.spring.henallux.javawebproject.dataAccess.entity.UserEntity;
+import com.spring.henallux.javawebproject.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ public class LoginController extends ControllerBase {
 
     @RequestMapping(method = RequestMethod.GET)
     public String loginForm(final Model model) {
-        model.addAttribute("loginForm", new LoginForm());
+        model.addAttribute("loginForm", new UserEntity());
 
         return "integrated:loginForm";
     }

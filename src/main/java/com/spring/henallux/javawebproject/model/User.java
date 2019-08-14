@@ -1,19 +1,33 @@
 package com.spring.henallux.javawebproject.model;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.*;
 
-public class User extends LoginForm {
+import static org.springframework.util.StringUtils.isEmpty;
+
+public class User implements UserDetails {
     private String authorities;
     private Boolean accountNonExpired;
     private Boolean accountNonLocked;
     private Boolean credentialsNonExpired;
     private Boolean enable;
 
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = "^[a-zA-Z''-'\\s]{1,40}$")
+    private String username;
+    @NotNull
+    @NotEmpty
+    @Size(min = 6)
+    private String password;
     @NotNull
     @NotEmpty
     @Pattern(regexp = "^\\D+$")
@@ -55,11 +69,32 @@ public class User extends LoginForm {
 
     }
 
-    public String getAuthorities() {
-        return authorities;
+    @Override
+    public Collection<GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+
+        if(!isEmpty(authorities)) {
+            String[] authoritiesAsArray = authorities.split(",");
+
+            for(String authority : authoritiesAsArray) {
+                if(!isEmpty(authority)) {
+                    grantedAuthorities.add(new SimpleGrantedAuthority(authority));
+                }
+            }
+        }
+
+        return grantedAuthorities;
     }
 
     //Setters section
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public void setAuthorities(String authorities) {
         this.authorities = authorities;
     }
@@ -123,7 +158,20 @@ public class User extends LoginForm {
     }
 
     //Getters section
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     public boolean isAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    public Boolean getAccountNonExpired() {
         return accountNonExpired;
     }
 
@@ -131,11 +179,23 @@ public class User extends LoginForm {
         return accountNonLocked;
     }
 
+    public Boolean getAccountNonLocked() {
+        return accountNonLocked;
+    }
+
     public boolean isCredentialsNonExpired() {
         return credentialsNonExpired;
     }
 
+    public Boolean getCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
     public boolean isEnabled() {
+        return enable;
+    }
+
+    public Boolean getEnabled() {
         return enable;
     }
 

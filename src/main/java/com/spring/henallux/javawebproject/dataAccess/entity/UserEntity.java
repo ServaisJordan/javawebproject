@@ -145,27 +145,49 @@ public class UserEntity implements UserDetails {
     }
 
     //Getters section
+    @Override
     public String getUsername() {
         return username;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
 
+    @Override
     public boolean isAccountNonExpired() {
         return accountNonExpired;
     }
 
+    public Boolean getAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    @Override
     public boolean isAccountNonLocked() {
         return accountNonLocked;
     }
 
+    public Boolean getAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    @Override
     public boolean isCredentialsNonExpired() {
         return credentialsNonExpired;
     }
 
+    public Boolean getCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    @Override
     public boolean isEnabled() {
+        return enable;
+    }
+
+    public Boolean getEnabled() {
         return enable;
     }
 

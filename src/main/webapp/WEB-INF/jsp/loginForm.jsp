@@ -5,7 +5,7 @@
     </head>
     <body>
         <%--@elvariable id="loginForm" type="LoginForm"--%>
-        <form:form id = "login" method="POST" action="/leGrandRoiFromage/login" modelAttribute="loginForm">
+        <form:form id = "login" method="POST" modelAttribute="loginForm">
             <p>
                 <form:label path="username"><spring:message code="username"/></form:label>
                 <form:input id="usernameInput" path="username" required="true"/>

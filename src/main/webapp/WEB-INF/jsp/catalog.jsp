@@ -15,7 +15,7 @@
         <c:forEach items="${cheeses}" var="cheese">
             <div class="cheese">
                 <p>${cheese.getName()}</p>
-                <spring:url value="/images/${cheese.getURLImage()}.jpg" var="imageURL"/>
+                <spring:url value="/images/${cheese.getURLImage()}" var="imageURL"/>
                 <img src=${imageURL}>
                 <p><spring:message code="pricePerKilo"/> : ${cheese.getPricePerKilo()}</p>
                 <spring:url value="/catalog/${cheese.getId()}" var="getCheese"/>

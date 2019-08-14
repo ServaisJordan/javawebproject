@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="cheese">
-        <spring:url value="/images/${cheese.getURLImage()}.jpg" var="imageURL"/>
+        <spring:url value="/images/${cheese.getURLImage()}" var="imageURL"/>
         <p>${cheese.getName()}</p>
         <img src=${imageURL}/>
         <p>${cheese.getTranslationsList().get(0).getDescription()}</p>

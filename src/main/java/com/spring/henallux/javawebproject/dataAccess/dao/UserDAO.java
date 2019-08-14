@@ -4,9 +4,11 @@ import com.spring.henallux.javawebproject.dataAccess.entity.UserEntity;
 import com.spring.henallux.javawebproject.dataAccess.repository.UserRepository;
 import com.spring.henallux.javawebproject.exceptions.UserNotFound;
 import com.spring.henallux.javawebproject.model.User;
+import com.spring.henallux.javawebproject.utility.Constants;
 import com.spring.henallux.javawebproject.utility.ProviderConverter;
 import com.spring.henallux.javawebproject.utility.TestModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -41,7 +43,14 @@ public class UserDAO {
         testUser.setObjectToTest(user);
         if (testUser.hasError()) throw new Exception(); //TODO
 
-        dataAccess.save(mapper.userModelToEntity(user));
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        UserEntity userEntity = mapper.userModelToEntity(user);
+        userEntity.setAccountNonExpired(true);
+        userEntity.setAccountNonLocked(true);
+        userEntity.setEnable(true);
+        userEntity.setAuthorities(Constants.USER);
+        userEntity.setCredentialsNonExpired(true);
+        dataAccess.save(userEntity);
         return user;
     }
 
