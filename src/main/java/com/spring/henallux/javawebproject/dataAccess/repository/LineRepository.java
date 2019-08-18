@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface LineRepository extends JpaRepository<LineEntity, String> {
-    List<LineEntity> findByCommandId(int commandId);
+    List<LineEntity> findByOrderId(int orderId);
 }

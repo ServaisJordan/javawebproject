@@ -1,5 +1,7 @@
 package com.spring.henallux.javawebproject.model;
 
+import com.spring.henallux.javawebproject.utility.UtilAuthority;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,12 +33,12 @@ public class User implements UserDetails {
     @NotNull
     @NotEmpty
     @Pattern(regexp = "^\\D+$")
-    @Size(min=6)
+    @Size(min=3)
     private String name;
     @NotNull
     @NotEmpty
     @Pattern(regexp = "^\\D+$")
-    @Size(min=6)
+    @Size(min=3)
     private String firstName;
     @NotNull
     @NotEmpty
@@ -44,26 +46,27 @@ public class User implements UserDetails {
     private String email;
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^0[1-68]([-. ]?\\d{2}){4}$")
+    @Pattern(regexp = "^(\\+32|0)[1-68]([-. ]?\\d{2}){3}([-. ]?\\d{1,2})$")
     private String phoneNumber;
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^\\d{4,5}$")
+    @Pattern(regexp = "^\\d{4}$")
     private String postalCode;
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^[A-z,' -]+$")
-    private String country;
+    @Pattern(regexp = "^[A-z,' \\-]+$")
+    private String city;
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^(\\d+ ?,? ?)?([A-z', \\d])+ ?(\\d+ ([boite|box] ?\\d))?$")
+    @Pattern(regexp = "^[A-z,' \\-\\d]+ \\d+ ?((boite|box) ?\\d+)?$")
     private String address;
     @Pattern(regexp = "^[m|f|M|F]$")
     private String gender;
     @Past
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
 
-    private Collection<Command> commands;
+    private Collection<Order> orders;
 
     public User() {
 
@@ -71,19 +74,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-
-        if(!isEmpty(authorities)) {
-            String[] authoritiesAsArray = authorities.split(",");
-
-            for(String authority : authoritiesAsArray) {
-                if(!isEmpty(authority)) {
-                    grantedAuthorities.add(new SimpleGrantedAuthority(authority));
-                }
-            }
-        }
-
-        return grantedAuthorities;
+        return UtilAuthority.getAuthorities(authorities);
     }
 
     //Setters section
@@ -135,8 +126,8 @@ public class User implements UserDetails {
         this.postalCode = postalCode;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public void setAddress(String address) {
@@ -153,8 +144,8 @@ public class User implements UserDetails {
         this.birthDate = birthDate;
     }
 
-    public void setCommands(Collection<Command> commands) {
-        this.commands = commands;
+    public void setOrders(Collection<Order> orders) {
+        this.orders = orders;
     }
 
     //Getters section
@@ -219,8 +210,8 @@ public class User implements UserDetails {
         return postalCode;
     }
 
-    public String getCountry() {
-        return country;
+    public String getCity() {
+        return city;
     }
 
     public String getAddress() {
@@ -235,8 +226,8 @@ public class User implements UserDetails {
         return gender;
     }
 
-    public Collection<Command> getCommands() {
-        return commands;
+    public Collection<Order> getOrders() {
+        return orders;
     }
 
 }

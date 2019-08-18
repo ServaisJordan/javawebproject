@@ -28,7 +28,7 @@ public class CheeseDAO {
     }
 
     public Cheese findCheese(int id) throws CheeseNotFound {
-        Optional<CheeseEntity> cheeseEntity = dataAccess.findById(String.valueOf(id));
+        Optional<CheeseEntity> cheeseEntity = dataAccess.findById(id);
 
         if (!cheeseEntity.isPresent()) throw new CheeseNotFound();
         return mapper.cheeseEntityToCheeseModel(cheeseEntity.get());

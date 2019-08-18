@@ -7,6 +7,7 @@ import java.util.Collection;
 @Table(name = "language")
 public class LanguageEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @Column(name = "name")

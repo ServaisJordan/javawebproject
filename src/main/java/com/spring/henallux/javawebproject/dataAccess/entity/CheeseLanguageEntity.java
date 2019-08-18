@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "cheese_language")
 public class CheeseLanguageEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @Column(name = "description")
@@ -31,11 +32,11 @@ public class CheeseLanguageEntity {
         this.description = description;
     }
 
-    public void setCheeseEntity(CheeseEntity cheese) {
+    public void setCheese(CheeseEntity cheese) {
         this.cheese = cheese;
     }
 
-    public void setLanguageEntity(LanguageEntity language) {
+    public void setLanguage(LanguageEntity language) {
         this.language = language;
     }
 
@@ -48,11 +49,11 @@ public class CheeseLanguageEntity {
         return description;
     }
 
-    public CheeseEntity getCheeseEntity() {
+    public CheeseEntity getCheese() {
         return cheese;
     }
 
-    public LanguageEntity getLanguageEntity() {
+    public LanguageEntity getLanguage() {
         return language;
     }
 }

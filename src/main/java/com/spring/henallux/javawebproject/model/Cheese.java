@@ -68,4 +68,29 @@ public class Cheese {
     }
 
     public List<CheeseLanguage> getTranslationsList() {return translations.stream().collect(Collectors.toList());}
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Cheese other = (Cheese) obj;
+        if (id != other.getId())
+            return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+
+        int result = (int) (id ^ (id >>> 32));
+
+        result = 31 * result + (id != null ? id.hashCode() : 0);
+
+        return result;
+
+    }
 }

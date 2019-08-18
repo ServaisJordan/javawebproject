@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "line")
 public class LineEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @Column(name = "quantity")
@@ -13,9 +14,9 @@ public class LineEntity {
     @Column(name = "price_per_kilo")
     private Double pricePerKilo;
 
-    @JoinColumn(name = "command_id", referencedColumnName = "id")
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
     @ManyToOne
-    private CommandEntity command;
+    private OrderEntity order;
     @JoinColumn(name = "cheese_id", referencedColumnName = "id")
     @ManyToOne
     private CheeseEntity cheese;
@@ -37,11 +38,11 @@ public class LineEntity {
         this.pricePerKilo = pricePerKilo;
     }
 
-    public void setCommandEntity(CommandEntity command) {
-        this.command = command;
+    public void setOrder(OrderEntity order) {
+        this.order = order;
     }
 
-    public void setCheeseEntity(CheeseEntity cheese) {
+    public void setCheese(CheeseEntity cheese) {
         this.cheese = cheese;
     }
 
@@ -58,11 +59,11 @@ public class LineEntity {
         return pricePerKilo;
     }
 
-    public CommandEntity getCommandEntity() {
-        return command;
+    public OrderEntity getOrder() {
+        return order;
     }
 
-    public CheeseEntity getCheeseEntity() {
+    public CheeseEntity getCheese() {
         return cheese;
     }
 }

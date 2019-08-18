@@ -1,5 +1,6 @@
 package com.spring.henallux.javawebproject.dataAccess.entity;
 
+import com.spring.henallux.javawebproject.utility.UtilAuthority;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -41,8 +42,8 @@ public class UserEntity implements UserDetails {
     private String phoneNumber;
     @Column(name = "postal_code")
     private String postalCode;
-    @Column(name = "country")
-    private String country;
+    @Column(name = "city")
+    private String city;
     @Column(name = "address")
     private String address;
     @Column(name = "gender")
@@ -51,7 +52,7 @@ public class UserEntity implements UserDetails {
     private Date birthDate;
 
     @OneToMany(mappedBy = "customer")
-    private Collection<CommandEntity> commands;
+    private Collection<OrderEntity> orders;
 
     public UserEntity() {
 
@@ -59,19 +60,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-
-        if(!isEmpty(authorities)) {
-            String[] authoritiesAsArray = authorities.split(",");
-
-            for(String authority : authoritiesAsArray) {
-                if(!isEmpty(authority)) {
-                    grantedAuthorities.add(new SimpleGrantedAuthority(authority));
-                }
-            }
-        }
-
-        return grantedAuthorities;
+        return UtilAuthority.getAuthorities(authorities);
     }
 
     //TODO setter + getter
@@ -124,8 +113,8 @@ public class UserEntity implements UserDetails {
         this.postalCode = postalCode;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public void setAddress(String address) {
@@ -140,8 +129,8 @@ public class UserEntity implements UserDetails {
         this.birthDate = birthDate;
     }
 
-    public void setCommandEntities(Collection<CommandEntity> commands) {
-        this.commands = commands;
+    public void setOrders(Collection<OrderEntity> orders) {
+        this.orders = orders;
     }
 
     //Getters section
@@ -211,8 +200,8 @@ public class UserEntity implements UserDetails {
         return postalCode;
     }
 
-    public String getCountry() {
-        return country;
+    public String getCity() {
+        return city;
     }
 
     public String getAddress() {
@@ -227,7 +216,7 @@ public class UserEntity implements UserDetails {
         return gender;
     }
 
-    public Collection<CommandEntity> getCommandEntities() {
-        return commands;
+    public Collection<OrderEntity> getOrders() {
+        return orders;
     }
 }

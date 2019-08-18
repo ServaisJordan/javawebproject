@@ -34,12 +34,12 @@ public class ProviderConverter {
         return mapper.map(cheeseLanguage, CheeseLanguageEntity.class);
     }
 
-    public Command commandEntityToCommandModel(CommandEntity commandEntity) {
-        return mapper.map(commandEntity, Command.class);
+    public Order orderEntityToOrderModel(OrderEntity order) {
+        return mapper.map(order, Order.class);
     }
 
-    public CommandEntity commandModelToCommandEntity(Command command) {
-        return mapper.map(command, CommandEntity.class);
+    public OrderEntity orderModelToOrderEntity(Order order) {
+        return mapper.map(order, OrderEntity.class);
     }
 
     public Language languageEntityToLanguageModel(LanguageEntity languageEntity) {

@@ -6,9 +6,10 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "command")
-public class CommandEntity {
+@Table(name = "order_entity")
+public class OrderEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @Column(name = "delivery_date")
@@ -21,10 +22,10 @@ public class CommandEntity {
     @JoinColumn(name = "username", referencedColumnName = "username")
     @ManyToOne
     private UserEntity customer;
-    @OneToMany(mappedBy = "command")
+    @OneToMany(mappedBy = "order")
     private Collection<LineEntity> lines;
 
-    public CommandEntity() {
+    public OrderEntity() {
 
     }
 

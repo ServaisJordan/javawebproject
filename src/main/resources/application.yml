@@ -1,7 +1,7 @@
 server:
   port: 8802
   servlet:
-    context-path: /leGrandRoiFromage
+    context-path: /cheeseKing
 spring:
   datasource:
     password: Dragon123654789

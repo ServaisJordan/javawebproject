@@ -2,17 +2,17 @@
 <%--
   Created by IntelliJ IDEA.
   User: HP
-  Date: 16-07-19
-  Time: 21:50
+  Date: 17-08-19
+  Time: 20:14
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-    <head>
-    </head>
-    <body>
-        <div class="marginTop">
-            <spring:message code="authenticatedMessage"/>
-        </div>
-    </body>
+<head>
+</head>
+<body>
+    <div class="center">
+        <spring:message code="presentationText"/>
+    </div>
+</body>
 </html>

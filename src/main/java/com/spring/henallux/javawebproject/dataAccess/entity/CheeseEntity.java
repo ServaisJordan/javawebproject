@@ -7,6 +7,7 @@ import java.util.Collection;
 @Table(name = "cheese")
 public class CheeseEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @Column(name = "price_per_kilo")

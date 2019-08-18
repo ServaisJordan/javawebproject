@@ -4,6 +4,7 @@ import com.spring.henallux.javawebproject.dataAccess.entity.CheeseLanguageEntity
 import com.spring.henallux.javawebproject.dataAccess.repository.CheeseLanguageRepository;
 import com.spring.henallux.javawebproject.dataAccess.repository.LanguageRepository;
 import com.spring.henallux.javawebproject.model.Cheese;
+import com.spring.henallux.javawebproject.model.CheeseLanguage;
 import com.spring.henallux.javawebproject.utility.ProviderConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,7 +27,7 @@ public class CheeseLanguageDAO {
         this.mapper = mapper;
     }
 
-    public Cheese findCheese(int cheeseId, Locale locale) throws Exception {
+    public CheeseLanguage findCheese(int cheeseId, Locale locale) throws Exception {
         String language;
         if (locale.getLanguage().equals("fr")) language = "français";
         else language = "english";
@@ -37,6 +38,6 @@ public class CheeseLanguageDAO {
 
         if (!cheeseLanguage.isPresent()) throw new Exception(); //TODO better exception
 
-        return mapper.cheeseEntityToCheeseModel(cheeseLanguage.get().getCheeseEntity());
+        return mapper.cheeseLanguageEntityToCheeseLanguageModel(cheeseLanguage.get());
     }
 }

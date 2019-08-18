@@ -4,27 +4,24 @@ import com.spring.henallux.javawebproject.dataAccess.dao.LineDAO;
 import com.spring.henallux.javawebproject.model.Line;
 import com.spring.henallux.javawebproject.utility.TestModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
+@Service
 public class LineServices {
     private final LineDAO dao;
-    private final TestModel<Line> testLine;
 
     @Autowired
     public LineServices(LineDAO dao, TestModel testLine) {
         this.dao = dao;
-        this.testLine = testLine;
     }
 
-    public Collection<Line> findLines(int commandId) {
-        return dao.findLines(commandId);
+    public Collection<Line> findLines(int orderId) {
+        return dao.findLines(orderId);
     }
 
-    public Line saveLine(Line line) throws Exception {
-        testLine.setObjectToTest(line);
-        if (testLine.hasError()) throw new Exception(); //TODO better exception
-
+    public Line saveLine(Line line) {
         return dao.saveLine(line);
     }
 

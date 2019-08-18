@@ -9,22 +9,26 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link href="<spring:url value="../css/main.css"/>" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    <div class="cheese">
-        <spring:url value="/images/${cheese.getURLImage()}" var="imageURL"/>
-        <p>${cheese.getName()}</p>
-        <img src=${imageURL}/>
-        <p>${cheese.getTranslationsList().get(0).getDescription()}</p>
-        <p><spring:message code="pricePerKilo"/> : ${cheese.getPricePerKilo()}</p>
-        <sec:authorize access="isAuthenticated()">
-            <%--@elvariable id="quantity" type="int"--%>
-            <form:form id = "basketForm" method="POST" action="/leGrandRoiFromage/Basket/addToBasket" modelAttribute="quantity">
-                <form:label path=""><spring:message code="quantity"/></form:label>
-                <form:input type="number" min="0" path=""/>
-                <form:button><spring:message code="submit"/></form:button>
+    <spring:url value="/images/${cheeseLanguage.getCheese().getURLImage()}" var="imageURL"/>
+    <div id="alignCenter">
+        <div class="cheese">
+            <p class="title">${cheeseLanguage.getCheese().getName()}</p>
+            <img id="imageCheeseFocus" src=${imageURL}/>
+            <p>${cheeseLanguage.getDescription()}</p>
+            <p><spring:message code="pricePerKilo"/> : ${cheeseLanguage.getCheese().getPricePerKilo()}€</p>
+            <spring:url value="/basket" var="basketURL"/>
+            <%--@elvariable id="basketEntry" type="com.spring.henallux.javawebproject.model.BasketEntry"--%>
+            <form:form id = "basketForm" method="POST" action="${basketURL}" modelAttribute="basketEntry">
+                <form:input path="cheeseId" type="hidden" value="${cheeseLanguage.getCheese().getId()}"/>
+                <p><form:label path="quantity"><spring:message code="quantity"/> (kilo)</form:label>
+                <form:input value="0" step="0.5" path="quantity"/></p>
+                <p><form:errors cssClass="error" path="quantity"/></p>
+                <form:button><spring:message code="addToBasket"/></form:button>
             </form:form>
-        </sec:authorize>
+        </div>
     </div>
 </body>
 </html>

@@ -2,6 +2,8 @@ package com.spring.henallux.javawebproject.dataAccess.dao;
 
 import com.spring.henallux.javawebproject.dataAccess.entity.UserEntity;
 import com.spring.henallux.javawebproject.dataAccess.repository.UserRepository;
+import com.spring.henallux.javawebproject.exceptions.EmailAlreadyUse;
+import com.spring.henallux.javawebproject.exceptions.UserAlreadyExist;
 import com.spring.henallux.javawebproject.exceptions.UserNotFound;
 import com.spring.henallux.javawebproject.model.User;
 import com.spring.henallux.javawebproject.utility.Constants;
@@ -42,6 +44,8 @@ public class UserDAO {
     public User saveUser(User user) throws Exception {
         testUser.setObjectToTest(user);
         if (testUser.hasError()) throw new Exception(); //TODO
+        if (dataAccess.existsByUsername(user.getUsername())) throw new UserAlreadyExist();
+        if (dataAccess.existsByEmail(user.getEmail())) throw new EmailAlreadyUse();
 
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         UserEntity userEntity = mapper.userModelToEntity(user);

@@ -1,5 +1,6 @@
 package com.spring.henallux.javawebproject.dataAccess.dao;
 
+import com.spring.henallux.javawebproject.dataAccess.entity.LineEntity;
 import com.spring.henallux.javawebproject.dataAccess.repository.LineRepository;
 import com.spring.henallux.javawebproject.model.Line;
 import com.spring.henallux.javawebproject.utility.ProviderConverter;
@@ -14,24 +15,20 @@ import java.util.stream.Collectors;
 public class LineDAO {
     private final LineRepository dataAccess;
     private final ProviderConverter mapper;
-    private final TestModel<Line> testLine;
 
     @Autowired
-    public LineDAO(LineRepository dataAccess, ProviderConverter mapper, TestModel<Line> testLine) {
+    public LineDAO(LineRepository dataAccess, ProviderConverter mapper) {
         this.dataAccess = dataAccess;
         this.mapper = mapper;
-        this.testLine = testLine;
     }
 
-    public Collection<Line> findLines(int commandId) {
-        return dataAccess.findByCommandId(commandId).stream().map(mapper::lineEntityToLineModel).collect(Collectors.toList());
+    public Collection<Line> findLines(int orderId) {
+        return dataAccess.findByOrderId(orderId).stream().map(mapper::lineEntityToLineModel).collect(Collectors.toList());
     }
 
-    public Line saveLine(Line line) throws Exception {
-        testLine.setObjectToTest(line);
-        if (testLine.hasError()) throw new Exception(); //TODO better exception
-
-        dataAccess.save(mapper.lineModelToLineEntity(line));
+    public Line saveLine(Line line) {
+        LineEntity lineEntity = mapper.lineModelToLineEntity(line);
+        dataAccess.save(lineEntity);
         return line;
     }
 

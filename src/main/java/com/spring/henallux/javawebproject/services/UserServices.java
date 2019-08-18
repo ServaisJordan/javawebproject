@@ -18,6 +18,10 @@ public class UserServices {
         this.testUser = testUser;
     }
 
+    public User findUser(String username) throws Exception {
+        return dao.findUser(username);
+    }
+
     public User saveUser(User user) throws Exception {
         testUser.setObjectToTest(user);
         if (testUser.hasError()) throw new Exception();

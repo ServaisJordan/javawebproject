@@ -1,15 +1,15 @@
 package com.spring.henallux.javawebproject.controllers;
 
+import com.spring.henallux.javawebproject.model.BasketEntry;
 import com.spring.henallux.javawebproject.model.Cheese;
+import com.spring.henallux.javawebproject.model.CheeseLanguage;
 import com.spring.henallux.javawebproject.services.CheeseLanguageServices;
 import com.spring.henallux.javawebproject.services.CheeseServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Locale;
@@ -37,12 +37,25 @@ public class CatalogController extends ControllerBase {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String cheese(@PathVariable(value = "id") int id, Model model, Locale locale) throws Exception {
-        Cheese cheese = cheeseLanguageServices.findCheese(id, locale);
+    public String cheese(@PathVariable(value = "id") String id, Model model, Locale locale) {
+        try {
+            int idConverted = Integer.valueOf(id);
+            CheeseLanguage cheeseLanguage = cheeseLanguageServices.findCheese(idConverted, locale);
 
-        model.addAttribute("cheese", cheese);
-        model.addAttribute("quantity", 0);
+            BasketEntry basketEntry = new BasketEntry() {{
+                setCheeseId(cheeseLanguage.getCheese().getId());
+                setQuantity(0.);
+            }};
 
-        return "integrated:cheese";
+            if (!model.containsAttribute("basketEntry"))
+                model.addAttribute("basketEntry", basketEntry);
+
+            model.addAttribute("cheeseLanguage", cheeseLanguage);
+
+            return "integrated:cheese";
+        } catch (Exception e) {
+            return "redirect:../";
+        }
+
     }
 }

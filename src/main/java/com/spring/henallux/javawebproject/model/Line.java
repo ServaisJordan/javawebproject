@@ -1,14 +1,12 @@
 package com.spring.henallux.javawebproject.model;
 
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
 public class Line {
     private Integer id;
     private Double quantity;
+    private Double pricePerKilo;
 
-    private Command command;
+    private Order order;
     private Cheese cheese;
 
     public Line() {
@@ -20,18 +18,20 @@ public class Line {
         this.id = id;
     }
 
-    @NotNull
-    @Min(value = 0)
     public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 
-    public void setCommand(Command command) {
-        this.command = command;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public void setCheese(Cheese cheese) {
         this.cheese = cheese;
+    }
+
+    public void setPricePerKilo(Double pricePerKilo) {
+        this.pricePerKilo = pricePerKilo;
     }
 
     //Getters section
@@ -43,11 +43,15 @@ public class Line {
         return quantity;
     }
 
-    public Command getCommand() {
-        return command;
+    public Order getOrder() {
+        return order;
     }
 
     public Cheese getCheese() {
         return  cheese;
+    }
+
+    public Double getPricePerKilo() {
+        return pricePerKilo;
     }
 }

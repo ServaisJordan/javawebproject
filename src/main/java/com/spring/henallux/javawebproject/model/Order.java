@@ -1,19 +1,24 @@
 package com.spring.henallux.javawebproject.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.validation.constraints.Future;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Date;
 
-public class Command {
+public class Order {
     private Integer id;
+    @Future
     private Date deliveryDate;
     private Date creationDate;
+    private Boolean isPay;
 
     private User customer;
     private Collection<Line> lines;
 
-    public Command() {
+    public Order() {
 
     }
 
@@ -22,8 +27,6 @@ public class Command {
         this.id = id;
     }
 
-    @NotNull
-    @Future
     public void setDeliveryDate(Date deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
@@ -38,6 +41,10 @@ public class Command {
 
     public void setLine(Collection<Line> lines) {
         this.lines = lines;
+    }
+
+    public void setIsPay(Boolean isPay) {
+        this.isPay = isPay;
     }
 
     //Getters section
@@ -59,5 +66,9 @@ public class Command {
 
     public Collection<Line> getLines() {
         return lines;
+    }
+
+    public Boolean getIsPay() {
+        return isPay;
     }
 }
