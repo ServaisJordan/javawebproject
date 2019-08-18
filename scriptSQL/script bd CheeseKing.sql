@@ -11,7 +11,7 @@ create schema javawebprojectcheeseking;
     `name` VARCHAR(100) not null,
     first_name VARCHAR(100) not null,
     email VARCHAR(100) not null unique,
-    phone_number VARCHAR(10) not null,
+    phone_number VARCHAR(12) not null,
     postal_code varchar(4) not null,
     city VARCHAR(100) not null,
     address VARCHAR(200) not null,
