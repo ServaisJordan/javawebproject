@@ -46,7 +46,7 @@ public class User implements UserDetails {
     private String email;
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^(\\+32|0)[1-68]([-. ]?\\d{2}){3}([-. ]?\\d{1,2})$")
+    @Pattern(regexp = "^(\\+32|0)[1-68](\\d{2}){3}(\\d{1,2})$")
     private String phoneNumber;
     @NotNull
     @NotEmpty

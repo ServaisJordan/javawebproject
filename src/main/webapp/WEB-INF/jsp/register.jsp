@@ -27,12 +27,12 @@
     <form:form id = "login" method="POST" action="${registerURL}" modelAttribute="user">
         <p>
             <form:label path="username"><spring:message code="username"/></form:label>
-            <form:input id="usernameInput" path="username" />
+            <form:input id="username" autofocus="true" path="username" />
             <form:errors cssClass="error" path="username"/>
         </p>
         <p>
             <form:label path="password"><spring:message code="password"/></form:label>
-            <form:password id="passwordInput" path="password" />
+            <form:password id="password" path="password" />
             <form:errors cssClass="error" path="password"/>
         </p>
         <p>

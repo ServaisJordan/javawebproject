@@ -7,7 +7,7 @@
         <form:form id = "login" method="POST" modelAttribute="loginForm">
             <p>
                 <form:label path="username"><spring:message code="username"/></form:label>
-                <form:input id="usernameInput" path="username" required="true"/>
+                <form:input id="usernameInput" autofocus="true" path="username" required="true"/>
                 <form:errors cssClass="error" path="username"/>
             </p>
             <p>

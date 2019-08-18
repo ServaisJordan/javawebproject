@@ -24,7 +24,7 @@
             <form:form id = "basketForm" method="POST" action="${basketURL}" modelAttribute="basketEntry">
                 <form:input path="cheeseId" type="hidden" value="${cheeseLanguage.getCheese().getId()}"/>
                 <p><form:label path="quantity"><spring:message code="quantity"/> (kilo)</form:label>
-                <form:input value="0" step="0.5" path="quantity"/></p>
+                <form:input value="0" step="0.5" autofocus="true" path="quantity"/></p>
                 <p><form:errors cssClass="error" path="quantity"/></p>
                 <form:button><spring:message code="addToBasket"/></form:button>
             </form:form>
