@@ -58,29 +58,34 @@ public class OrderController extends ControllerBase {
 
     @RequestMapping(value = "/makeOrder",method = RequestMethod.GET)
     public String makeCommand(@ModelAttribute(value = Constants.BASKET) HashMap<Cheese, Double> basket,
-                              Authentication authentication) throws Exception {
-        Order order = new Order();
+                              Authentication authentication) {
+        try {
+            Order order = new Order();
 
-        order.setIsPay(false);
+            order.setIsPay(false);
 
-        UserEntity userEntity = (UserEntity) authentication.getPrincipal();
-        User user = userServices.findUser(userEntity.getUsername());
+            UserEntity userEntity = (UserEntity) authentication.getPrincipal();
+            User user = userServices.findUser(userEntity.getUsername());
 
-        order.setCustomer(user);
-        Order orderSave = orderServices.saveOrder(order);
+            order.setCustomer(user);
+            Order orderSave = orderServices.saveOrder(order);
 
-        for (Map.Entry<Cheese, Double> basketEntry : basket.entrySet()) {
-            lineServices.saveLine(new Line() {{
-                setQuantity(basketEntry.getValue());
-                setCheese(basketEntry.getKey());
-                setPricePerKilo(basketEntry.getKey().getPricePerKilo());
-                setOrder(orderSave);
-            }});
+            for (Map.Entry<Cheese, Double> basketEntry : basket.entrySet()) {
+                lineServices.saveLine(new Line() {{
+                    setQuantity(basketEntry.getValue());
+                    setCheese(basketEntry.getKey());
+                    setPricePerKilo(basketEntry.getKey().getPricePerKilo());
+                    setOrder(orderSave);
+                }});
+            }
+
+            basket.clear();
+
+            return "redirect:../order";
+        } catch (Exception e) {
+            return "redirect:../";
         }
 
-        basket.clear();
-
-        return "redirect:../order";
     }
 
     @RequestMapping(value="/{id}", method = RequestMethod.GET)
@@ -91,6 +96,7 @@ public class OrderController extends ControllerBase {
             model.addAttribute("lines", lines);
             model.addAttribute("order", lines.stream().collect(Collectors.toList()).get(0).getOrder());
             model.addAttribute("title", getMessageSource().getMessage("orderTitle", null, locale));
+            model.addAttribute("language", getMessageSource().getMessage("languageCode", null, locale));
 
             return "integrated:order";
         } catch (Exception e) {

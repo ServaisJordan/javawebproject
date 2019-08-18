@@ -11,6 +11,6 @@
     <head>
     </head>
     <body>
-        <p><spring:message code="adminMessage"/></p>
+        <p class="center"><spring:message code="adminMessage"/></p>
     </body>
 </html>

@@ -11,7 +11,7 @@
     <head>
     </head>
     <body>
-        <div class="marginTop">
+        <div class="center">
             <spring:message code="authenticatedMessage"/>
         </div>
     </body>

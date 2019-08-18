@@ -34,6 +34,7 @@
                 <input name="return" type="hidden" value="http://localhost:8802/cheeseKing/paid/${order.getId()}"/>
                 <input name="cancel_return" type="hidden" value="http://localhost:8802/cheeseKing/orders"/>
                 <input name="currency_code" type="hidden" value="EUR"/>
+                <input name="lc" type="hidden" value="${language}" />
                 <button><spring:message code="pay"/></button>
             </form>
         </c:if>
