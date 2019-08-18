@@ -35,7 +35,7 @@ public class BasketController extends ControllerBase {
     public String getBasket(Model model, Locale locale,
                             @ModelAttribute(Constants.BASKET) HashMap<Cheese, Double> basket) {
         model.addAttribute(Constants.BASKET, basket);
-        model.addAttribute("title", getMessageSource().getMessage("basketPageTitle", null, locale));
+        model.addAttribute("title", getMessageSource().getMessage("basket", null, locale));
         if (!model.containsAttribute("basketEntryEdit"))
             model.addAttribute("basketEntryEdit", new BasketEntry());
 
@@ -43,8 +43,7 @@ public class BasketController extends ControllerBase {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String addToBasket(Model model,
-                              @ModelAttribute(value = Constants.BASKET) HashMap<Cheese, Double> basket,
+    public String addToBasket(@ModelAttribute(value = Constants.BASKET) HashMap<Cheese, Double> basket,
                               @Valid @ModelAttribute(value="basketEntry")BasketEntry basketEntry,
                               BindingResult result,
                               RedirectAttributes redirectAttributes) {
@@ -59,8 +58,6 @@ public class BasketController extends ControllerBase {
                 if (basket.containsKey(cheese)) basket.replace(cheese, basket.get(cheese) + basketEntry.getQuantity());
                 else basket.put(cheese, basketEntry.getQuantity());
             }
-            model.addAttribute("title", cheese.getName());
-
             return "redirect:catalog";
         } catch (Exception e) {
             return "redirect:/";

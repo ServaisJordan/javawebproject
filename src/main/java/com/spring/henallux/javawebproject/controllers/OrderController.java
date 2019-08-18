@@ -51,7 +51,7 @@ public class OrderController extends ControllerBase {
         orders.stream().collect(Collectors.toList()).sort(Comparator.comparing(Order::getCreationDate).reversed());
         model.addAttribute("formatDate", new SimpleDateFormat("dd-MM-yy"));
         model.addAttribute("orders", orders);
-        model.addAttribute("title", getMessageSource().getMessage("order", null, locale));
+        model.addAttribute("title", getMessageSource().getMessage("orderTitle", null, locale));
 
         return "integrated:orders";
     }

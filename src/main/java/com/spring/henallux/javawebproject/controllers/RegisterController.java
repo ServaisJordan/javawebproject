@@ -32,6 +32,7 @@ public class RegisterController extends ControllerBase {
 
         if (!model.containsAttribute("user"))
             model.addAttribute("user", new User());
+        model.addAttribute("title", getMessageSource().getMessage("signup", null, locale));
 
         return "integrated:register";
     }

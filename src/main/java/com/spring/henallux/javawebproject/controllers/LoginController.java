@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Locale;
+
 @Controller
 @RequestMapping(value = "/login")
 public class LoginController extends ControllerBase {
@@ -19,8 +21,9 @@ public class LoginController extends ControllerBase {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String loginForm(final Model model) {
+    public String loginForm(final Model model, Locale locale) {
         model.addAttribute("loginForm", new UserEntity());
+        model.addAttribute("title", getMessageSource().getMessage("signin", null, locale));
 
         return "integrated:loginForm";
     }

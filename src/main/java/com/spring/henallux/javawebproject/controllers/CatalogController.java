@@ -30,9 +30,10 @@ public class CatalogController extends ControllerBase {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String catalog(Model model) {
+    public String catalog(Model model, Locale locale) {
         List<Cheese> cheeses = (List<Cheese>) cheeseServices.findAll();
         model.addAttribute("cheeses", cheeses);
+        model.addAttribute("title", getMessageSource().getMessage("catalog", null, locale));
         return "integrated:catalog";
     }
 
@@ -51,6 +52,7 @@ public class CatalogController extends ControllerBase {
                 model.addAttribute("basketEntry", basketEntry);
 
             model.addAttribute("cheeseLanguage", cheeseLanguage);
+            model.addAttribute("title", getMessageSource().getMessage("cheese", null, locale));
 
             return "integrated:cheese";
         } catch (Exception e) {
